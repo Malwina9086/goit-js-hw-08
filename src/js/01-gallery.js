@@ -34,7 +34,7 @@ function selectImage(eventImage) {
     return;
   }
   const selectedImage = eventImage.target.dataset.source;
-  const openedImage = basicLightbox.create(`<img src="${selectedImage}">`);
+  const openedImage = SimpleLightbox.create(`<img src="${selectedImage}">`);
   openedImage.show();
 
   document.addEventListener('keydown', escapePress);
