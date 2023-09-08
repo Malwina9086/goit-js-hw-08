@@ -26,22 +26,18 @@ const galleryElements = galleryItems
 
 galleryList.insertAdjacentHTML('beforeend', galleryElements);
 
-galleryList.addEventListener('click', selectImage);
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionSelector: 'img',
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
-function selectImage(eventImage) {
-  eventImage.preventDefault();
-  if (eventImage.target.nodeName !== 'IMG') {
-    return;
-  }
-  const selectedImage = eventImage.target.dataset.source;
-  const openedImage = SimpleLightbox.create(`<img src="${selectedImage}">`);
-  openedImage.show();
-
-  document.addEventListener('keydown', escapePress);
-  function escapePress(eventKey) {
-    if (eventKey.code === 'Escape') {
-      openedImage.close();
-      document.removeEventListener('keydown', escapePress);
-    }
+document.addEventListener('keydown', escapePress);
+function escapePress(eventKey) {
+  if (eventKey.code === 'Escape') {
+    openedImage.close();
+    document.removeEventListener('keydown', escapePress);
   }
 }
